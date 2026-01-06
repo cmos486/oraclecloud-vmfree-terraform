@@ -1,0 +1,56 @@
+# =============================================================================
+# Copia este archivo a terraform.tfvars y rellena con tus valores
+# =============================================================================
+
+# OCID del tenancy
+# OCI Console -> Profile -> Tenancy -> OCID
+tenancy_ocid = ""
+
+# OCID de tu usuario
+# OCI Console -> Profile -> My profile -> OCID
+user_ocid = ""
+
+# Fingerprint de tu API key
+# Aparece al crear la API key o en: My profile -> API keys
+fingerprint = ""
+
+# Ruta a la clave privada de la API key
+private_key_path = "~/.oci/oci_api_key.pem"
+
+# Región de despliegue
+# Opciones: eu-madrid-1, eu-frankfurt-1, eu-amsterdam-1, uk-london-1, etc.
+region = "eu-frankfurt-1"
+
+# Tu clave pública SSH (el contenido completo)
+# Obtener con: cat ~/.ssh/id_rsa.pub
+ssh_public_key = ""
+
+# Nombre para la VM
+vm_name = "free-tier-vm"
+
+# IP/CIDR permitido para SSH e ICMP
+# Tu IP: curl ifconfig.me (añade /32 al final)
+# Ejemplo: "203.0.113.50/32"
+# Abierto (no recomendado): "0.0.0.0/0"
+allowed_ssh_cidr = ""
+
+# Availability Domain (índice empezando en 0)
+# Frankfurt tiene 3: AD-1=0, AD-2=1, AD-3=2
+# Madrid solo tiene 1: AD-1=0
+availability_domain_number = 0
+
+# Shape de la instancia
+# Free Tier AMD: "VM.Standard.E2.1.Micro" (1/8 OCPU, 1GB RAM) - solo home region
+# Free Tier ARM: "VM.Standard.A1.Flex" (configurable, hasta 4 OCPU, 24GB RAM)
+instance_shape = "VM.Standard.A1.Flex"
+
+# Configuración para shapes Flex (ignorado para Micro)
+# Free Tier ARM total: 4 OCPUs y 24GB RAM (puedes dividirlo entre varias VMs)
+instance_ocpus     = 1
+instance_memory_gb = 6
+
+# Networking - CIDRs
+# Usamos rangos poco comunes para evitar colisiones con VPNs site-to-site
+# Opciones recomendadas: 10.100.0.0/16, 10.99.0.0/16, 172.20.0.0/16, 10.250.0.0/16
+vcn_cidr    = "10.100.0.0/16"
+subnet_cidr = "10.100.1.0/24"
