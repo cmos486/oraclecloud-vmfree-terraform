@@ -48,6 +48,12 @@ variable "ssh_public_key" {
   type        = string
 }
 
+variable "ssh_private_key_path" {
+  description = "Ruta a tu clave privada SSH (para esperar a cloud-init)"
+  type        = string
+  default     = "~/.ssh/id_rsa"
+}
+
 variable "vm_name" {
   description = "Nombre de la VM"
   type        = string
@@ -271,6 +277,7 @@ apt-get update
 apt-get install -y \
   wireguard \
   wireguard-tools \
+  resolvconf \
   htop \
   vim \
   curl \
@@ -513,7 +520,7 @@ resource "null_resource" "wait_for_cloud_init" {
     type        = "ssh"
     host        = oci_core_instance.vpn_client.public_ip
     user        = "ubuntu"
-    private_key = file(pathexpand("~/.ssh/id_rsa"))
+    private_key = file(pathexpand(var.ssh_private_key_path))
     timeout     = "5m"
   }
 

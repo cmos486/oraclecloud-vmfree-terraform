@@ -17,7 +17,7 @@ Terraform para desplegar una VM **VM.Standard.E2.1.Micro** (Always Free) en Orac
 - Timezone Europe/Madrid
 
 **Software preinstalado (cloud-init):**
-- WireGuard + wireguard-tools
+- WireGuard + wireguard-tools + resolvconf
 - Herramientas: htop, vim, curl, jq, net-tools
 - unattended-upgrades (actualizaciones de seguridad automáticas)
 - fail2ban (protección SSH: ban 1h tras 5 intentos fallidos)
